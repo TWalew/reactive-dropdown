@@ -14,8 +14,6 @@ export default class Dropdown extends Component {
             value: '',
         };
         this.storeChanged = this.storeChanged.bind(this);
-        //this.handleKeyPress = this.handleKeyPress.bind(this);
-
     }
 
     componentDidMount() {
@@ -35,26 +33,24 @@ export default class Dropdown extends Component {
         });
     }
 
-    handleKeyPress = (event) => {
-        console.log(event.key);
-        if (event.key !== 'Backspace' && event.key !== 'Shift' &&
-            event.key !== 'CapsLock' && event.key !== 'Tab' &&
-            event.key !== 'Alt' && event.key !== 'Enter' &&
-            event.key !== 'Control' && event.key !== 'Enter') {
+    _handleKeyPress = (event) => {
+        let RegExpression = /^[a-zA-Z\s]*$/;
+
+        if (RegExpression.test(event.key) && event.key.length === 1) {
             searchString+=event.key;
         }else if(event.key === 'Backspace'){
             searchString = searchString.slice(0,-1);
         }
         Actions.GetAll(searchString);
+
         if (searchString === ''){
             this.setState({
                 cities: []
             });
-            console.log(this.state.cities);
         }
     };
 
-    setValue(name) {
+    _setValue(name) {
         searchString = name;
         Actions.GetAll(searchString)
     }
@@ -70,11 +66,11 @@ export default class Dropdown extends Component {
                 <div className="dropdown">
                     <input placeholder="Search for Cities"
                            type="text" pattern="[A-Za-z]"
-                           value={searchString} onKeyDown={this.handleKeyPress} />
+                           value={searchString} onKeyDown={this._handleKeyPress} />
                     <ul className="auto-suggest">{
                         cities.map((city) => {
                             return (
-                                <li key={city.id} className="suggestion-box" onClick={() => {this.setValue(city.name)}}>
+                                <li key={city.id} className="suggestion-box" onClick={() => {this._setValue(city.name)}}>
                                     <span>
                                         {city.name}
                                     </span>
