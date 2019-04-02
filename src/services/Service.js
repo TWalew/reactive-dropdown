@@ -1,53 +1,61 @@
 const data = {
     'cities': [
-        { id: 0,name: 'Sofia' },
-        { id: 1,name: 'Plovdiv' },
-        { id: 2,name: 'Varna' },
-        { id: 3,name: 'Burgas' },
-        { id: 4,name: 'Ruse' },
-        { id: 5,name: 'Stara Zagora' },
-        { id: 6,name: 'Pleven' },
-        { id: 7,name: 'Sliven' },
-        { id: 8,name: 'Dobrich' },
-        { id: 9,name: 'Shumen' },
-        { id: 10,name: 'Pernik' },
-        { id: 11,name: 'Haskovo' },
-        { id: 12,name: 'Vratsa' },
-        { id: 12,name: 'Kyustendil' },
-        { id: 12,name: 'Montana' },
-        { id: 12,name: 'Lovech' },
-        { id: 12,name: 'Razgrad' },
-        { id: 12,name: 'Borino' },
-        { id: 12,name: 'Madan' },
-        { id: 12,name: 'Zlatograd' },
-        { id: 12,name: 'Pazardzhik' },
-        { id: 12,name: 'Smolyan' },
-        { id: 12,name: 'Blagoevgrad' },
-        { id: 12,name: 'Nedelino' },
-        { id: 12,name: 'Rudozem' },
-        { id: 12,name: 'Devin' },
-        { id: 12,name: 'Veliko Tarnovo' },
-        { id: 12,name: 'Vidin' },
-        { id: 12,name: 'Kirkovo' },
-        { id: 12,name: 'Krumovgrad' },
-        { id: 12,name: 'Dzhebel' },
-        { id: 12,name: 'Silistra' },
-        { id: 12,name: 'Sarnitsa' },
-        { id: 12,name: 'Shiroka Laka' },
-        { id: 12,name: 'Yambol' },
-        { id: 12,name: 'Dospat' },
-        { id: 12,name: 'Kardzhali' },
-        { id: 12,name: 'Gabrovo' },
-        { id: 12,name: 'Targovishte' },
+        { id: 0, name: 'Sofia' },
+        { id: 1, name: 'Plovdiv' },
+        { id: 2, name: 'Varna' },
+        { id: 3, name: 'Burgas' },
+        { id: 4, name: 'Ruse' },
+        { id: 5, name: 'Stara Zagora' },
+        { id: 6, name: 'Pleven' },
+        { id: 7, name:  'Sliven' },
+        { id: 8, name: 'Dobrich' },
+        { id: 9, name: 'Shumen' },
+        { id: 10, name: 'Pernik' },
+        { id: 11, name: 'Haskovo' },
+        { id: 12, name: 'Vratsa' },
+        { id: 13, name: 'Kyustendil' },
+        { id: 14, name: 'Montana' },
+        { id: 15, name: 'Lovech' },
+        { id: 16, name: 'Razgrad' },
+        { id: 17, name: 'Borino' },
+        { id: 18, name: 'Madan' },
+        { id: 19, name: 'Zlatograd' },
+        { id: 20, name: 'Pazardzhik' },
+        { id: 21, name: 'Smolyan' },
+        { id: 22, name: 'Blagoevgrad' },
+        { id: 23, name: 'Nedelino' },
+        { id: 24, name: 'Rudozem' },
+        { id: 25, name: 'Devin' },
+        { id: 26, name: 'Veliko Tarnovo' },
+        { id: 27, name: 'Vidin' },
+        { id: 28, name: 'Kirkovo' },
+        { id: 29, name: 'Krumovgrad' },
+        { id: 30, name: 'Dzhebel' },
+        { id: 31, name: 'Silistra' },
+        { id: 32, name: 'Sarnitsa' },
+        { id: 33, name: 'Shiroka Laka' },
+        { id: 34, name: 'Yambol' },
+        { id: 35, name: 'Dospat' },
+        { id: 36, name: 'Kardzhali' },
+        { id: 37, name: 'Gabrovo' },
+        { id: 38, name: 'Targovishte' },
 
     ]
 };
 
+function _filterItems(arr, query) {
+    if (query !=='') {
+        return arr.filter(function(el) {
+            return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+        })
+    }
+}
+
 export default class Service {
-    static GetAllCountries() {
+    static GetAllCities(name) {
         return (
-            Promise.resolve(data.cities)
-                .then(users => users)
+            Promise.resolve(_filterItems(data.cities, name))
+                .then(cities => cities)
         )
     }
 }
